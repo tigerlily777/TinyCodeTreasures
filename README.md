@@ -261,6 +261,51 @@ LAUNCHER: 把这个 Activity 放到桌面 App 列表里（也就是主页面）
 
 Action 说你想干啥，Data 说你处理啥内容，Category 说你属于啥场景。
 
+## 🎯 DeepLink
+
+### 1️⃣ 什么是 Deep Link？
+✅ Deep Link（深层链接），简单说就是：
+
+通过一个网页链接，直接打开 App 里的某个具体页面。
+
+比如：
+	•	你收到一条短信，里面有个链接
+	•	你点击链接，不是打开浏览器，而是直接跳到 App 某个页面
+	•	如果 App 没安装，再跳到应用商店（这个叫 App Links，后面可以扩展讲）
+ 
+### 2️⃣ Deep Link 和 Intent Filter 的关系？
+
+Deep Link 就是靠 Intent Filter 来实现的！
+
+我们在 AndroidManifest.xml 里给某个 Activity 注册一个特定的 <intent-filter>，告诉系统：
+
+✅「我可以处理某种特定格式的 URL！」
+
+系统收到点击链接时，就会查谁注册了对应的 Deep Link Intent Filter，然后交给它打开。
+
+### 3️⃣ Deep Link 最简单完整例子
+假设你有一个 ProductDetailActivity，
+你想让它支持打开这种链接：https://www.example.com/product/123
+那你要在 AndroidManifest.xml 里注册：
+
+```xml
+<activity android:name=".ProductDetailActivity">
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" /> //normal deeplinks are all VIEW
+        
+        <category android:name="android.intent.category.DEFAULT" /> //允许系统正常弹出
+        <category android:name="android.intent.category.BROWSABLE" /> //允许从浏览器，网页跳转过来
+        
+        <data
+            android:scheme="https" // https only, it may also use "myapp"
+            android:host="www.example.com" //host url only
+            android:pathPrefix="/product/" /> //paths with this prefix only
+    </intent-filter>
+</activity>
+```
+
+
+
 
 
 
