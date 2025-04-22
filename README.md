@@ -146,3 +146,39 @@ Intent Filter 是用来告诉系统：“我这个组件，能处理哪些类型
 •	一个 Intent Filter 可以有多个 <action> <category> <data>
 •	系统只会给符合全部条件的组件发送 Intent！
 
+## 🎯 第五部分：多 Action / 多 Data / 多 Category 的规则
+
+### 1️⃣ 一个 Intent Filter 可以有多个 <action>
+
+意思是：
+这个组件可以同时处理多种不同的请求。
+
+比如：
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+</intent-filter>
+```
+✅ 这个 Filter 表示：
+•	可以处理 VIEW（比如打开网页）
+•	也可以处理 SEND（比如接收分享）
+
+### 2️⃣ 一个 Intent Filter 可以有多个 <data> 或 <type>
+
+比如：
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    
+    <data android:mimeType="image/*" />
+    <data android:mimeType="video/*" />
+</intent-filter>
+```
+✅ 表示可以接收：
+•	图片分享
+•	视频分享
+
+### 3️⃣ 匹配规则总结
