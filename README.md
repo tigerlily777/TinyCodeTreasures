@@ -1,6 +1,7 @@
 # TinyCodeTreasures
 ✨ A collection of tiny but mighty code examples — each snippet a small treasure on the journey to from noob to ninja 🚀
 
+
 ## 📚 第一部分：什么是 Intent？
 
 ### 什么是 Intent？
@@ -10,8 +11,6 @@ Intent 就是 Android 里面用于「请求做一件事」的消息对象。
 简单说，就是：
 •	我要干什么（比如：打开一个页面、发通知、打电话）
 •	我要谁来帮我干（指定 app，或者让系统自己找）
-
-
 
 ### 为什么需要 Intent？
 
@@ -30,6 +29,7 @@ Intent 是 Android 应用内部和系统之间沟通的标准语言。
 💬 就像打电话一样：
 •	拨号 = 创建 Intent
 •	接电话 = 系统根据 Intent 找到合适的处理者
+
 
 ## 🎯 第二部分：Intent 的两大分类
 
@@ -65,6 +65,7 @@ startActivity(intent)
 
 系统看到你想 “ACTION_VIEW 一个网页链接”，就会弹出浏览器供你选择。
 
+
 ## 🎯 第三部分：Intent的用途
 
 ✅ 1. 用 Intent 启动 Activity（你已经掌握了！）
@@ -94,6 +95,7 @@ startService(intent)
 val intent = Intent("com.example.ACTION_DOWNLOAD_COMPLETE")
 sendBroadcast(intent)
 其他 App（或者你自己 App 的 BroadcastReceiver）就能监听到这个广播，做出反应！
+
 
 ## 🎯 第四部分：什么是 Intent Filter？
 
