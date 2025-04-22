@@ -4,7 +4,7 @@
 
 ## 📚 第一部分：什么是 Intent？
 
-### 什么是 Intent？
+### - 什么是 Intent？
 
 Intent 就是 Android 里面用于「请求做一件事」的消息对象。
 
@@ -12,7 +12,7 @@ Intent 就是 Android 里面用于「请求做一件事」的消息对象。
 •	我要干什么（比如：打开一个页面、发通知、打电话）
 •	我要谁来帮我干（指定 app，或者让系统自己找）
 
-### 为什么需要 Intent？
+### - 为什么需要 Intent？
 
 因为 Android 不是像 PC 那样一个程序打到底。
 Android 是由很多小组件（Activity / Service / BroadcastReceiver）拼起来的，
@@ -22,7 +22,7 @@ Android 是由很多小组件（Activity / Service / BroadcastReceiver）拼起�
 ✅ 启动一个后台下载 Service？用 Intent！
 ✅ 发一条广播通知所有 App？也用 Intent！
 
-🌟 小总结
+### 🌟 小总结
 
 Intent 是 Android 应用内部和系统之间沟通的标准语言。
 
@@ -33,7 +33,7 @@ Intent 是 Android 应用内部和系统之间沟通的标准语言。
 
 ## 🎯 第二部分：Intent 的两大分类
 
-1️⃣ Explicit Intent（明确的）
+### 1️⃣ Explicit Intent（明确的）
 
 👉 你明确告诉系统，你想启动哪个组件（Activity / Service）
 
@@ -43,11 +43,13 @@ Intent 是 Android 应用内部和系统之间沟通的标准语言。
 •	App 内部页面跳转（比如从 LoginActivity 到 HomeActivity）
 •	启动自己 app 里的 Service、Broadcast
 ✅ 代码示例：
+```kotlin
 val intent = Intent(this, DetailActivity::class.java)
 intent.putExtra("item_id", 123)
 startActivity(intent)
+```
 
-2️⃣ Implicit Intent（隐式的）
+### 2️⃣ Implicit Intent（隐式的）
 
 👉 你不告诉系统你要启动哪个组件，只说“我想干这件事”，系统会帮你找合适的组件来处理它。
 
@@ -59,41 +61,48 @@ startActivity(intent)
 •	调用其他 app 提供的功能（比如图库、拍照）
 
 ✅ 代码示例：
+```kotlin
 val intent = Intent(Intent.ACTION_VIEW)
 intent.data = Uri.parse("https://www.example.com")
 startActivity(intent)
-
+```
 系统看到你想 “ACTION_VIEW 一个网页链接”，就会弹出浏览器供你选择。
 
 
 ## 🎯 第三部分：Intent的用途
 
-✅ 1. 用 Intent 启动 Activity（你已经掌握了！）
+### ✅ 1. 用 Intent 启动 Activity（你已经掌握了！）
 
 比如从 MainActivity 跳到 DetailActivity，带上商品 ID：
+```kotlin
 val intent = Intent(this, DetailActivity::class.java)
 intent.putExtra("product_id", 12345)
 startActivity(intent)
+```
 
-✅ 2. 用 Intent 启动 Service
+### ✅ 2. 用 Intent 启动 Service
 🔵 Service 是什么？
 
 一个「没有界面」的后台任务，比如播放音乐、后台下载、位置跟踪。
 
 用 Intent 启动 Service，例子：
+```kotlin
 val intent = Intent(this, DownloadService::class.java)
 startService(intent)
+```
 
 🔵 如果是「前台服务」（比如银行 App 要防止后台被杀），你还需要用 startForegroundService(intent)。
 
-✅ 3. 用 Intent 发送 Broadcast
+### ✅ 3. 用 Intent 发送 Broadcast
 🔵 Broadcast 是什么？
 
 一种「广播」机制，可以通知所有注册的 Receiver：「嘿，我这里发生了个事件！」
 比如你想告诉系统「下载完成了」：
 
+```kotlin
 val intent = Intent("com.example.ACTION_DOWNLOAD_COMPLETE")
 sendBroadcast(intent)
+```
 其他 App（或者你自己 App 的 BroadcastReceiver）就能监听到这个广播，做出反应！
 
 
