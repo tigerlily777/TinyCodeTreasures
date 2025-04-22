@@ -182,3 +182,86 @@ Intent Filter 是用来告诉系统：“我这个组件，能处理哪些类型
 •	视频分享
 
 ### 3️⃣ 匹配规则总结
+
+｜条件 ｜说明 ｜
+| :--- | :--- |
+｜所有 <action> 里有一个能匹配上 ｜✅
+｜所有 <category> 里全部满足 ｜ ✅
+｜<data>（或者 <type>）条件至少一个能匹配 ｜✅
+
+简单记：Action匹配任意一个，Category必须全满足，Data至少一个能匹配！
+
+### 🌟 举个例子串起来：
+比如你的 Activity 注册了：
+```xml
+<intent-filter>
+    <action android:name="android.intent.action.VIEW" />
+    <action android:name="android.intent.action.SEND" />
+    <category android:name="android.intent.category.DEFAULT" />
+    <data android:scheme="http" />
+    <data android:mimeType="image/*" />
+</intent-filter>
+```
+✅ 那么这个 Activity 可以处理：
+•	打开网页的请求（http://）
+•	分享图片的请求（image/*）
+
+如果发来一个 ACTION_VIEW + http 链接，✅ 匹配上！
+如果发来一个 ACTION_SEND + image/* 文件，✅ 也匹配上！
+
+
+## 🎯 总结梳理一下：
+### 🧩 1. Action 和 Data 是什么关系？
+
+✅ Action 是说：我要干什么事情。
+
+✅ Data 是说：我要处理什么内容。
+
+📦 类比一下（超级好懂的小比喻）
+
+假设你在干快递行业：
+Action：快递员的动作，比如「送快递」、「收快递」、「取快递」
+Data：快递的内容，比如「一部手机」、「一盒鞋子」、「生鲜」
+
+🧠 放回到 Android 世界里：
+
+比如分享图片的例子：
+•	Action = “我要发送（SEND）一份东西”
+•	Data = “这份东西是 image/ 类型（图片）”*
+
+🌟 为什么两个都需要？
+
+因为系统需要根据动作类型和数据类型来综合判断，
+到底该让哪个 Activity 处理。
+
+举个更真实的例子：
+•	如果 Action 是 SEND，但 Data 是 text/plain，就去找可以发文本的 App（比如微信、笔记本）
+•	如果 Action 是 SEND，Data 是 image/*，就去找可以发图片的 App（比如图库、相册App）
+
+动作 + 数据内容一起决定谁能接单！
+
+### 🧩 2. 那 Category 又是什么？
+
+✅ Category 是进一步加的「限制条件」。
+
+简单来说：
+
+我不仅要知道「你干什么动作」（Action）、
+我不仅要知道「你处理什么数据」（Data），
+我还要知道「你属于哪一类行为」（Category）。
+
+📚 常见的 Category 有：
+DEFAULT: 这是一个标准的、正常的 Activity，可以正常弹出给用户
+
+BROWSABLE: 允许网页链接跳转进来，比如 DeepLink 打开 App
+
+LAUNCHER: 把这个 Activity 放到桌面 App 列表里（也就是主页面）
+
+🏆 小总结一句话
+
+Action 说你想干啥，Data 说你处理啥内容，Category 说你属于啥场景。
+
+
+
+
+
