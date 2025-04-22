@@ -1,5 +1,4 @@
-# TinyCodeTreasures
-✨ A collection of tiny but mighty code examples — each snippet a small treasure on the journey to from noob to ninja 🚀
+# Intent and deep link
 
 
 ## 📚 第一部分：什么是 Intent？
